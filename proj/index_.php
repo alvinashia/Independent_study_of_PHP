@@ -9,8 +9,8 @@ $title = '首頁 - 舒營';
 <div class="container">
     <h2>Home</h2>
     <!-- $pdo->quote() 用來跳脫 SQL 裡值的單引號, 避免 SQL injection 是手動跳脫  -->
-    <p><?= $pdo->quote("Alice's cats") ?></p>
-
+    <?php /* <p><?= $pdo->quote("Alice's cats") ?></p>*/ ?>
+    <P>一個可以拼輸贏的好地方：）</P>
 </div>
 <?php include __DIR__ . '/parts/scripts.php' ?>
 <?php include __DIR__ . '/parts/html-foot.php' ?>

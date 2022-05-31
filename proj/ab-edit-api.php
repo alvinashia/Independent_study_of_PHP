@@ -19,43 +19,49 @@ $sid = isset($_POST['sid']) ? intval($_POST['sid']) : 0;
 
 
 // TODO: 欄位檢查, 後端的檢查
-if (empty($sid) or empty($_POST['name'])) {
-    // 這兩個是必有，如果其中一個沒有就是結束
-    $output['error'] = '沒有姓名資料';
-    $output['code'] = 400;
-    echo json_encode($output, JSON_UNESCAPED_UNICODE);
-    exit;
-}
+// if (empty($sid) or empty($_POST['name'])) {
+//     // 這兩個是必有，如果其中一個沒有就是結束
+//     $output['error'] = '沒有姓名資料';
+//     $output['code'] = 400;
+//     echo json_encode($output, JSON_UNESCAPED_UNICODE);
+//     exit;
+// }
 
-$name = $_POST['name'];
-$email = $_POST['email'] ?? '';
-$mobile = $_POST['mobile'] ?? '';
-$birthday = empty($_POST['birthday']) ? NULL : $_POST['birthday'];
+$pic = $_POST['pic'] ?? '';
+$area = $_POST['area'] ?? '';
+$name = $_POST['name'] ?? '';
+$type = $_POST['type'] ?? '';
+$open_time = $_POST['open_time'] ?? '';
+$close_day = $_POST['close_day'] ?? '';
+$tel = $_POST['tel'] ?? '';
 $address = $_POST['address'] ?? '';
+$descripition = $_POST['description'] ?? '';
+$event_site = $_POST['event_site'] ?? '';
 
-if (!empty($email) and filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
-    $output['error'] = 'email 格式錯誤';
-    $output['code'] = 405;
-    echo json_encode($output, JSON_UNESCAPED_UNICODE);
-    exit;
-}
+// if (!empty($email) and filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
+//     $output['error'] = 'email 格式錯誤';
+//     $output['code'] = 405;
+//     echo json_encode($output, JSON_UNESCAPED_UNICODE);
+//     exit;
+// }
 // TODO: 其他欄位檢查
 
 
-$sql = "UPDATE `address_book` SET `name`=?, `email`=?, `mobile`=?, `birthday`=?, `address`=? WHERE `sid`=?,";
-//在phpmyadmin 的SQL下面選擇update 可以把原始值生出來，再改就好
-// 原本有的SID不做修改，所以把原本sid的位置移到最後，並把原本有的1刪除，改成$SID
-// `created_at`=？因為原本表單上沒有所以拿掉
-// 注意~where前面不要有,
+$sql = "UPDATE `tourist_spot` SET `pic`=?,`area`=?,`name`=?,`type`=?,`open_time`=?,`close_day`=?,`tel`=?,`address`=?,`description`=?,`event_site`=? WHERE `sid`=$sid ";
 
 $stmt = $pdo->prepare($sql);
 
 $stmt->execute([
+    $pic,
+    $area,
     $name,
-    $email,
-    $mobile,
-    $birthday,
+    $type,
+    $open_time,
+    $close_day,
+    $tel,
     $address,
+    $descripition,
+    $event_site,
 ]);
 
 
