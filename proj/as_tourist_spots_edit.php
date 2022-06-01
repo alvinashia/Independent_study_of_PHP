@@ -74,12 +74,12 @@ if (empty($row)) {
                                 <div action="as_upload_picture_api.php" method="post" enctype="multipart/form-data" style="display: none">
                                     <input type="file" name="picture" accept="image/*" />
                                 </div>
-                                <button id="btnn" onclick="uploadPicture()">上傳圖片</button>
+                                <button id="btnn" name="pic" onclick="uploadPicture()">上傳圖片</button>
                                 <br>
                                 <img id="myimg" src="" alt="" style="width: 250px;" class="pt-2" />
                             </div>
                             <div class="mb-3">
-                                <select class="form-select form-select-sm" aria-label="Default select example" data-multiple name="hobby1">
+                                <select class="form-select form-select-sm" aria-label="Default select example" data-multiple name="area">
                                     <option value="" selected disabled>-- 請選擇所在鄉鎮 --</option>
                                     <option value="頭城鎮">頭城鎮</option>
                                     <option value="礁溪鄉">礁溪鄉</option>
@@ -98,17 +98,17 @@ if (empty($row)) {
                             <div class="mb-3">
                                 <label for="type" class="form-label">類型</label>
                                 <textarea class="form-control" name="type" id="type" cols="30" rows="1"><?= $row['type'] ?></textarea>
-                                <div class="form-text "></div>
+                                <div class="form-text red"></div>
                             </div>
                             <div class="mb-3">
                                 <label for="open_time" class="form-label">開放時間</label>
                                 <textarea class="form-control" name="open_time" id="open_time" cols="30" rows="1"><?= $row['open_time'] ?></textarea>
-                                <div class="form-text "></div>
+                                <div class="form-text red"></div>
                             </div>
                             <div class="mb-3">
                                 <label for="close_day" class="form-label">休館日</label>
                                 <textarea class="form-control" name="close_day" id="close_day" cols="30" rows="1"><?= $row['close_day'] ?></textarea>
-                                <div class="form-text"></div>
+                                <div class="form-text red"></div>
                             </div>
                             <div class="mb-3">
                                 <label for="tel" class="form-label">電話</label>
@@ -129,7 +129,7 @@ if (empty($row)) {
                             <div class="mb-3">
                                 <label for="event_site" class="form-label">活動網址</label>
                                 <textarea class="form-control" name="event_site" id="event_site" cols="30" rows="2"><?= $row['event_site'] ?></textarea>
-                                <div class="form-text"></div>
+                                <div class="form-text red"></div>
                             </div>
                             <button type="submit" class="btn btn-primary">修改</button>
                         </form>
@@ -189,6 +189,11 @@ if (empty($row)) {
     // for (let f of fields) {
     //     fieldTexts.push(f.nextElementSibling);
     // }
+
+    for (let i = 0; i < fields.length; i++) {
+        // console.log(i, fields[i])
+        fieldTexts.push(fields[i].nextElementSibling);
+    }
 
 
     async function sendData() {
@@ -270,4 +275,4 @@ if (empty($row)) {
 
     }
 </script>
-<?php include __DIR__ . '/parts/html-foot.php' ?>
+<?php include __DIR__ . '/parts/html-foot.php' ?>>
