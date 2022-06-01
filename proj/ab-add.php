@@ -84,7 +84,14 @@ $title = '新增景點資料 - 舒營';
                             <!-- 中間不能有換行或空白，不然會變成textarea的值 -->
                             <div class="form-text "></div>
                         </div>
-
+                        <div class="mb-3">
+                            <label for="event_site" class="form-label">有無活動</label>
+                            <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" data-multiple name="hobby1">
+                                <option value="" selected disabled>-- 請選擇 --</option>
+                                <option value="1">有活動</option>
+                                <option value="0">沒活動</option>
+                            </select>
+                        </div>
                         <button type="submit" class="btn btn-primary">新增</button>
                     </form>
                     <div id="info-bar" class="alert alert-success" role="alert" style="display:none;">
@@ -114,6 +121,7 @@ $title = '新增景點資料 - 舒營';
     const description_f = document.form1.description;
     const pic_f = document.form1.pic;
     const event_site_f = document.form1.event_site;
+
     //這邊是先拿到欄位的參照，表示值，值是要到sendData裡面才會需要
     // TODO: 5/26 9:30
 

@@ -50,7 +50,7 @@ $open = '開放時間：';
                     <h6 class="card-text"><?= $open . $row['open_time']  ?></h6>
                     <h6 class="card-text"><?= $row['close_day'] ?></h6>
                     <p class="card-text pt-3 "><?= $row['description'] ?></p>
-                    <p class="card-text pb-2 "><a href="<?= $row['event_site'] ?>" name="event" id="event">參加活動</a></p>
+                    <p class="card-text pb-2 "><a href="<?= $row['event_site'] ?? "javascript:void(0);" ?>" name="event" id="event" ?>參加活動</a></p>
                 </div>
                 <a href="as_tourist_spots_list.php" class="btn btn-primary">返回</a>
             </div>
@@ -62,12 +62,12 @@ $open = '開放時間：';
     // const event = document.card1.event;
 
 
-    const event = document.querySelector('#event')
-    event.addEventListener("click", myFunction);
+    const event = document.querySelector('#event');
+    event.addEventListener("click", checkEvent);
 
-    function myFunction() {
-        if (event.value == null) {
-            alert("目前沒有相關活動");
+    function checkEvent() {
+        if (event.href === "javascript:void(0);") {
+            alert("目前沒有相關活動")
         }
     }
     // TODO:要如何讓他判定更為正確（有網頁的時候不會跳出alert並直接跳轉）

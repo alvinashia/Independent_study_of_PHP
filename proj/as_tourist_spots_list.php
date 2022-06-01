@@ -83,9 +83,11 @@ if ($totalRows > 0) {
                     <th style="display: none" scope="col p-3">地址</th>
                     <th style="display: none" scope="col p-3">描述</th>
                     <th style="display: none" scope="col p-3">活動網址</th>
+                    <th style="display: none" scope="col p-3">有無活動</th>
                     <th scope="col p-3"><i class="fa-solid fa-trash-can"></i></th>
                     <th scope="col p-3"><i class="fa-solid fa-pen-to-square"></i></th>
                     <th scope="col p-3"> <i class="fa-solid fa-list"></i></th>
+
                 </tr>
             </thead>
             <tbody>
@@ -109,6 +111,7 @@ if ($totalRows > 0) {
                         <td style="display: none" class="p-3 size"><?= htmlentities($r['address']) ?></td>
                         <td style="display: none" class="p-3"><?= htmlentities($r['description']) ?></td>
                         <td style="display: none" class="p-3"><?= htmlentities($r['event_site']) ?></td>
+                        <td style="display: none" class="p-3"><?= htmlentities($r['event_situation']) ?></td>
                         <?php /*  <td><?= htmlentities($r['address']) ?></td> --> */ ?>
                         <!-- 防止被攻擊ex:爛芭樂事件，就需要再列表頁這邊設置htmlentities，但也有以下方法-->
                         <?php /*<td><?= strip_tags($r['address']) ?></td>*/ ?>
@@ -121,7 +124,7 @@ if ($totalRows > 0) {
                             </a>
                         </td>
                         <td class="p-3">
-                            <a href="ab-edit.php?sid=<?= $r['sid'] ?>">
+                            <a href="as_tourist_spots_edit.php?sid=<?= $r['sid'] ?>">
                                 <!-- 編輯他，并告訴他是哪一筆 -->
                                 <i class="fa-solid fa-pen-to-square"></i>
                             </a>

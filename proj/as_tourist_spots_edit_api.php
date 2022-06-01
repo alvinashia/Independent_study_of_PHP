@@ -19,17 +19,15 @@ $sid = isset($_POST['sid']) ? intval($_POST['sid']) : 0;
 
 
 // TODO: 欄位檢查, 後端的檢查
-// if (empty($sid) or empty($_POST['name'])) {
-//     // 這兩個是必有，如果其中一個沒有就是結束
-//     $output['error'] = '沒有姓名資料';
-//     $output['code'] = 400;
-//     echo json_encode($output, JSON_UNESCAPED_UNICODE);
-//     exit;
-// }
-
+if (empty($_POST['name'])) {
+    $output['error'] = '沒有名稱資料';
+    $output['code'] = 400;
+    echo json_encode($output, JSON_UNESCAPED_UNICODE);
+    exit;
+}
+$name = $_POST['name'] ?? '';
 $pic = $_POST['pic'] ?? '';
 $area = $_POST['area'] ?? '';
-$name = $_POST['name'] ?? '';
 $type = $_POST['type'] ?? '';
 $open_time = $_POST['open_time'] ?? '';
 $close_day = $_POST['close_day'] ?? '';
