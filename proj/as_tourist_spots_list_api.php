@@ -1,6 +1,6 @@
 <?php require __DIR__ . '/parts/connect_db.php';
-$pageName = 'ab-list';
-$title = '通訊錄列表 - 小新的網站';
+$pageName = 'as_tourist_spots_list_api';
+$title = '周圍景點列表 - 舒營';
 
 $perPage = 20; // 每一頁有幾筆
 
@@ -11,7 +11,7 @@ if ($page < 1) {
     exit;
 }
 
-$t_sql = "SELECT COUNT(1) FROM address_book";
+$t_sql = "SELECT COUNT(1) FROM tourist_spot";
 $totalRows = $pdo->query($t_sql)->fetch(PDO::FETCH_NUM)[0]; // 總筆數
 
 $totalPages = ceil($totalRows / $perPage); // 總共有幾頁

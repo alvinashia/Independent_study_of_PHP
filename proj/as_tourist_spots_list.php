@@ -56,7 +56,7 @@ if ($totalRows > 0) {
                 新增景點
             </i>
         </a>
-        <a class="nav-link text-dark p-3" href="" target="_blank">
+        <a class="nav-link text-dark p-3" href="as_tourist_spots_page.php" target="_blank">
             <i class="fa-solid fa-eye"></i>
             View Site
         </a>

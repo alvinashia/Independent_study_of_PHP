@@ -15,7 +15,7 @@ if (empty($sid)) {
 // 有的話就會進去上面if的循環，直接讓query執行
 // 沒有就直接exit轉回列表頁
 
-$row = $pdo->query("SELECT * FROM tourist_spot WHERE sid=$sid")->fetch();
+$row = $pdo->query("SELECT * FROM `tourist_spot` WHERE sid=$sid")->fetch();
 if (empty($row)) {
     // 拿到sid（帶入上面的變數）後執行fetch，要嘛拿到一筆，要嘛什麼都沒拿到
     // 如果是空的陣列，empty會拿到true,也是跟上面一樣直接跳轉到列表頁
@@ -84,18 +84,19 @@ if (empty($row)) {
                                 <label for="area" class="form-label">區域</label>
                                 <select class="form-control" name="area" id="area">
                                     <option value="" selected disabled>-- 請選擇所在鄉鎮 --</option>
-                                    <option value="頭城鎮">頭城鎮</option>
-                                    <option value="礁溪鄉">礁溪鄉</option>
-                                    <option value="員山鄉">員山鄉</option>
-                                    <option value="宜蘭市">宜蘭市</option>
-                                    <option value="三星鄉">三星鄉</option>
-                                    <option value="大同鄉">大同鄉</option>
-                                    <option value="南澳鄉">南澳鄉</option>
-                                    <option value="羅東鎮">羅東鎮</option>
-                                    <option value="冬山鄉">冬山鄉</option>
-                                    <option value="蘇澳鎮">蘇澳鎮</option>
-                                    <option value="五結鄉">五結鄉</option>
-                                    <option value="壯圍鄉">壯圍鄉</option>
+                                    <option value="頭城鎮" <?= $row['area'] == '頭城鎮' ? 'selected' : ''  ?>>頭城鎮</option>
+                                    <option value="礁溪鄉  <?= $row['area'] == '礁溪鎮' ? 'selected' : ''  ?>">礁溪鄉</option>
+                                    <option value="員山鄉" <?= $row['area'] == '員山鄉' ? 'selected' : ''  ?>>員山鄉</option>
+                                    <option value="宜蘭市" <?= $row['area'] == '宜蘭市' ? 'selected' : ''  ?>>宜蘭市</option>
+                                    <option value="三星鄉" <?= $row['area'] == '三星鄉' ? 'selected' : ''  ?>>三星鄉</option>
+                                    <option value="大同鄉" <?= $row['area'] == '大同鄉' ? 'selected' : ''  ?>>大同鄉</option>
+                                    <option value="南澳鄉" <?= $row['area'] == '南澳鄉' ? 'selected' : ''  ?>>南澳鄉</option>
+                                    <option value="羅東鎮" <?= $row['area'] == '羅東鎮' ? 'selected' : ''  ?>>羅東鎮</option>
+                                    <option value="冬山鄉" <?= $row['area'] == '冬山鄉' ? 'selected' : ''  ?>>冬山鄉</option>
+                                    <option value="蘇澳鎮" <?= $row['area'] == '蘇澳鎮' ? 'selected' : ''  ?>>蘇澳鎮</option>
+                                    <option value="五結鄉" <?= $row['area'] == '五結鄉' ? 'selected' : ''  ?>>五結鄉</option>
+                                    <option value="壯圍鄉" <?= $row['area'] == '壯圍鄉' ? 'selected' : ''  ?>>壯圍鄉</option>
+                                    <!-- TODO:是否能用廻圈判斷？ -->
                                 </select>
                             </div>
                             <div class="mb-3">
@@ -167,6 +168,8 @@ if (empty($row)) {
         });
         const obj = await r.json();
         console.log(obj);
+        //obj['filename'];
+        // 這裡是抓到亂碼的圖片檔名，現在要想這麼把他傳回資料庫
         myimg.src = "./uploaded/" + obj.filename;
     });
 
