@@ -51,7 +51,7 @@ if ($totalRows > 0) {
 <div class="container p-5 pt-0">
 
     <div class="w-100 d-flex justify-content-end">
-        <a class="nav-link text-dark p-3" href="ab-add.php">
+        <a class="nav-link text-dark p-3" href="as_tourist_spots_add.php">
             <i class="fa-solid fa-plus">
                 新增景點
             </i>

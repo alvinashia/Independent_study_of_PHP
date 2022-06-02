@@ -1,28 +1,6 @@
 <?php require __DIR__ . '/parts/connect_db.php';
-$pageName = 'as_tourist_spots_edit';
-$title = '編輯景點資料 - 舒營';
-
-
-// 概念：接受SID 沒有值就不做，拿到資料到row的變數裡面，再放到JS裡面，並且用JSON輸出
-
-$sid = isset($_GET['sid']) ? intval($_GET['sid']) : 0;
-if (empty($sid)) {
-
-    header('Location: as_tourist_spots_list.php');
-    exit;
-}
-// 如果$sid是空字串或者是0，那就不做了（false）
-// 有的話就會進去上面if的循環，直接讓query執行
-// 沒有就直接exit轉回列表頁
-
-$row = $pdo->query("SELECT * FROM tourist_spot WHERE sid=$sid")->fetch();
-if (empty($row)) {
-    // 拿到sid（帶入上面的變數）後執行fetch，要嘛拿到一筆，要嘛什麼都沒拿到
-    // 如果是空的陣列，empty會拿到true,也是跟上面一樣直接跳轉到列表頁
-    header('Location: as_tourist_spots_list.php');
-    exit;
-}
-
+$pageName = 'as_tourist_spots_add';
+$title = '新增景點資料 - 舒營';
 
 ?>
 <?php include __DIR__ . '/parts/html-head.php' ?>
@@ -45,11 +23,6 @@ if (empty($row)) {
             <i class="fa-solid fa-arrow-rotate-left"></i>
             返回上層
         </a>
-        <a class="nav-link text-dark p-3" href="as_tourist_spots_add.php">
-            <i class="fa-solid fa-plus">
-                新增景點
-            </i>
-        </a>
         <a class="nav-link text-dark p-3" href="" target="_blank">
             <i class="fa-solid fa-eye"></i>
             View Site
@@ -60,14 +33,13 @@ if (empty($row)) {
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">編輯資料</h5>
+                        <h5 class="card-title">新增資料</h5>
                         <form name="form1" onsubmit="sendData();return false;" novalidate>
-                            <input type="hidden" name="sid" value="<?= $row['sid'] ?>">
                             <!-- 為了讓後端知道是哪一筆，最好是其他資料一起送，最方便的做法就是直接在這邊放input隱藏欄位 ,雖然看不到，但是當送出的時候會一起送出-->
                             <!-- name sid 就是primarykey的 欄位-->
                             <div class="mb-3">
                                 <label for="name" class="form-label">名稱</label>
-                                <textarea class="form-control" name="name" id="name" cols="30" rows="1"><?= $row['name'] ?></textarea>
+                                <textarea class="form-control" name="name" id="name" cols="30" rows="1"></textarea>
                                 <div class="form-text red"></div>
                             </div>
                             <div class="mb-3">
@@ -100,45 +72,45 @@ if (empty($row)) {
                             </div>
                             <div class="mb-3">
                                 <label for="type" class="form-label">類型</label>
-                                <textarea class="form-control" name="type" id="type" cols="30" rows="1"><?= $row['type'] ?></textarea>
+                                <textarea class="form-control" name="type" id="type" cols="30" rows="1"></textarea>
                                 <div class="form-text red"></div>
                             </div>
                             <div class="mb-3">
                                 <label for="open_time" class="form-label">開放時間</label>
-                                <textarea class="form-control" name="open_time" id="open_time" cols="30" rows="1"><?= $row['open_time'] ?></textarea>
+                                <textarea class="form-control" name="open_time" id="open_time" cols="30" rows="1"></textarea>
                                 <div class="form-text red"></div>
                             </div>
                             <div class="mb-3">
                                 <label for="close_day" class="form-label">休館日</label>
-                                <textarea class="form-control" name="close_day" id="close_day" cols="30" rows="1"><?= $row['close_day'] ?></textarea>
+                                <textarea class="form-control" name="close_day" id="close_day" cols="30" rows="1"></textarea>
                                 <div class="form-text red"></div>
                             </div>
                             <div class="mb-3">
                                 <label for="tel" class="form-label">電話</label>
-                                <input type="text" class="form-control" id="tel" name="tel" value="<?= $row['tel'] ?>">
+                                <input type="text" class="form-control" id="tel" name="tel">
                                 <div class="form-text red"></div>
                                 <!-- TODO:設定or判斷式 -->
                             </div>
                             <div class="mb-3">
                                 <label for="address" class="form-label">地址</label>
-                                <textarea class="form-control" name="address" id="address" cols="30" rows="2"><?= $row['address'] ?></textarea>
+                                <textarea class="form-control" name="address" id="address" cols="30" rows="2"></textarea>
                                 <div class="form-text red"></div>
                             </div>
                             <div class="mb-3">
                                 <label for="description" class="form-label">描述</label>
-                                <textarea class="form-control" name="description" id="description" cols="30" rows="3"><?= $row['description'] ?></textarea>
+                                <textarea class="form-control" name="description" id="description" cols="30" rows="3"></textarea>
                                 <div class="form-text red"></div>
                             </div>
                             <div class="mb-3">
                                 <label for="event_site" class="form-label">活動網址</label>
-                                <textarea class="form-control" name="event_site" id="event_site" cols="30" rows="2"><?= $row['event_site'] ?></textarea>
+                                <textarea class="form-control" name="event_site" id="event_site" cols="30" rows="2"></textarea>
                                 <div class="form-text red"></div>
                             </div>
-                            <button type="submit" class="btn btn-primary">修改</button>
+                            <button type="submit" class="btn btn-primary">新增</button>
                         </form>
                         <br>
                         <div id="info-bar" class="alert alert-success" role="alert" style="display:none;">
-                            資料編輯成功
+                            資料新增成功
                         </div>
                     </div>
                 </div>
@@ -148,13 +120,10 @@ if (empty($row)) {
 </div>
 
 <?php include __DIR__ . '/parts/scripts.php' ?>
+
+
 <script>
-    const row = <?= json_encode($row, JSON_UNESCAPED_UNICODE); ?>;
-    // 這邊的JS就是當有資料時轉換成json_encode，並且設定不要跳脫
-    // 
-
     const tel_re = /\d{2,4}-?\d{3,4}-?\d{3,4}#?(\d+)?/;
-
     const pic = document.querySelector('#pic');
     const myimg = document.querySelector('#myimg');
     const picture = document.form1.picture;
@@ -254,7 +223,7 @@ if (empty($row)) {
 
         const fd = new FormData(document.form1);
         // 打包
-        const r = await fetch('as_tourist_spots_edit_api.php', {
+        const r = await fetch('as_tourist_spots_add_api.php', {
             // 丟出去
             method: 'POST',
             body: fd,
@@ -265,7 +234,7 @@ if (empty($row)) {
         if (result.success) {
             info_bar.classList.remove('alert-danger');
             info_bar.classList.add('alert-success');
-            info_bar.innerText = '修改成功';
+            info_bar.innerText = '新增成功';
 
             setTimeout(() => {
                 // location.href = 'ab-list.php'; // 跳轉到列表頁
@@ -273,7 +242,7 @@ if (empty($row)) {
         } else {
             info_bar.classList.remove('alert-success');
             info_bar.classList.add('alert-danger');
-            info_bar.innerText = result.error || '資料沒有修改';
+            info_bar.innerText = result.error || '資料沒有新增';
         }
 
     }
