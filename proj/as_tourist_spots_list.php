@@ -185,7 +185,7 @@ if ($totalRows > 0) {
 <script>
     function delete_it(sid) {
         if (confirm(`確定要刪除編號為 ${sid} 的資料嗎?`)) {
-            location.href = `ab-delete.php?sid=${sid}`;
+            location.href = `as_tourist_spots_delete.php?sid=${sid}`;
             // 如果是確定就是做轉向，轉向到ab-delete.php?sid=
         }
     }
