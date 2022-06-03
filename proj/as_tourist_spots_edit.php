@@ -169,7 +169,7 @@ if (empty($row)) {
         const obj = await r.json();
         console.log(obj);
         //obj['filename'];
-        // 這裡是抓到亂碼的圖片檔名，現在要想這麼把他傳回資料庫
+        // 這裡是抓到亂碼的圖片檔名，現在要想這麼把他傳回資料庫到pic的欄位上
         myimg.src = "./uploaded/" + obj.filename;
     });
 
