@@ -81,7 +81,7 @@ $title = '周邊景點';
 
         return `<div class="card col-lg-6 mb-5 pb-5 ">
             <div class="card-body d-flex flex-column mr-2 position-relative">
-                <img src="./imgs/${pic}.jpg" class="img-fluid rounded mx-auto d-block" style="width: 600px;height:400px" alt="...">
+                <img src="./uploaded/${pic}" class="img-fluid rounded mx-auto d-block" style="width: 600px;height:400px" alt="...">
                 <div style="width:600px ;">
                 <h2 class="card-title mt-3">${name}</h2>
                 <small class="text-muted">位於 ${area} 的${type}</small>

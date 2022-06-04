@@ -70,83 +70,83 @@ if (empty($row)) {
                                 <textarea class="form-control" name="name" id="name" cols="30" rows="1"><?= $row['name'] ?></textarea>
                                 <div class="form-text red"></div>
                             </div>
-                            <div class="mb-3">
+                            < class="mb-3">
                                 <div action="as_upload_picture_api.php" method="post" enctype="multipart/form-data" style="display: none">
                                     <input type="file" name="picture" accept="image/*" />
-
                                 </div>
                                 <label for="pic" class="form-label">配圖</label>
                                 <button id="pic" name="pic" onclick="uploadPicture()">上傳圖片</button>
                                 <!-- 建立一個invisble的欄位 并放入得到的檔名，然後在黨們這邊放 $row['pic'] -->
                                 <br>
                                 <img id="myimg" src="" alt="" style="width: 250px;" class="pt-2" />
-                            </div>
-                            <div class="mb-3">
-                                <label for="area" class="form-label">區域</label>
-                                <select class="form-control" name="area" id="area">
-                                    <option value="" selected disabled>-- 請選擇所在鄉鎮 --</option>
-                                    <option value="頭城鎮" <?= $row['area'] == '頭城鎮' ? 'selected' : ''  ?>>頭城鎮</option>
-                                    <option value="礁溪鄉" <?= $row['area'] == '礁溪鄉' ? 'selected' : ''  ?>>礁溪鄉</option>
-                                    <option value="員山鄉" <?= $row['area'] == '員山鄉' ? 'selected' : ''  ?>>員山鄉</option>
-                                    <option value="宜蘭市" <?= $row['area'] == '宜蘭市' ? 'selected' : ''  ?>>宜蘭市</option>
-                                    <option value="三星鄉" <?= $row['area'] == '三星鄉' ? 'selected' : ''  ?>>三星鄉</option>
-                                    <option value="大同鄉" <?= $row['area'] == '大同鄉' ? 'selected' : ''  ?>>大同鄉</option>
-                                    <option value="南澳鄉" <?= $row['area'] == '南澳鄉' ? 'selected' : ''  ?>>南澳鄉</option>
-                                    <option value="羅東鎮" <?= $row['area'] == '羅東鎮' ? 'selected' : ''  ?>>羅東鎮</option>
-                                    <option value="冬山鄉" <?= $row['area'] == '冬山鄉' ? 'selected' : ''  ?>>冬山鄉</option>
-                                    <option value="蘇澳鎮" <?= $row['area'] == '蘇澳鎮' ? 'selected' : ''  ?>>蘇澳鎮</option>
-                                    <option value="五結鄉" <?= $row['area'] == '五結鄉' ? 'selected' : ''  ?>>五結鄉</option>
-                                    <option value="壯圍鄉" <?= $row['area'] == '壯圍鄉' ? 'selected' : ''  ?>>壯圍鄉</option>
-                                    <!-- TODO:是否能用廻圈判斷？ -->
-                                </select>
-                            </div>
-                            <div class="mb-3">
-                                <label for="type" class="form-label">類型</label>
-                                <textarea class="form-control" name="type" id="type" cols="30" rows="1"><?= $row['type'] ?></textarea>
-                                <div class="form-text red"></div>
-                            </div>
-                            <div class="mb-3">
-                                <label for="open_time" class="form-label">開放時間</label>
-                                <textarea class="form-control" name="open_time" id="open_time" cols="30" rows="1"><?= $row['open_time'] ?></textarea>
-                                <div class="form-text red"></div>
-                            </div>
-                            <div class="mb-3">
-                                <label for="close_day" class="form-label">休館日</label>
-                                <textarea class="form-control" name="close_day" id="close_day" cols="30" rows="1"><?= $row['close_day'] ?></textarea>
-                                <div class="form-text red"></div>
-                            </div>
-                            <div class="mb-3">
-                                <label for="tel" class="form-label">電話</label>
-                                <input type="text" class="form-control" id="tel" name="tel" value="<?= $row['tel'] ?>">
-                                <div class="form-text red"></div>
-                                <!-- TODO:設定or判斷式 -->
-                            </div>
-                            <div class="mb-3">
-                                <label for="address" class="form-label">地址</label>
-                                <textarea class="form-control" name="address" id="address" cols="30" rows="2"><?= $row['address'] ?></textarea>
-                                <div class="form-text red"></div>
-                            </div>
-                            <div class="mb-3">
-                                <label for="description" class="form-label">描述</label>
-                                <textarea class="form-control" name="description" id="description" cols="30" rows="3"><?= $row['description'] ?></textarea>
-                                <div class="form-text red"></div>
-                            </div>
-                            <div class="mb-3">
-                                <label for="event_site" class="form-label">活動網址</label>
-                                <textarea class="form-control" name="event_site" id="event_site" cols="30" rows="2"><?= $row['event_site'] ?></textarea>
-                                <div class="form-text red"></div>
-                            </div>
-                            <button type="submit" class="btn btn-primary">修改</button>
-                        </form>
-                        <br>
-                        <div id="info-bar" class="alert alert-success" role="alert" style="display:none;">
-                            資料編輯成功
-                        </div>
+
+                    </div>
+                    <div class="mb-3">
+                        <label for="area" class="form-label">區域</label>
+                        <select class="form-control" name="area" id="area">
+                            <option value="" selected disabled>-- 請選擇所在鄉鎮 --</option>
+                            <option value="頭城鎮" <?= $row['area'] == '頭城鎮' ? 'selected' : ''  ?>>頭城鎮</option>
+                            <option value="礁溪鄉" <?= $row['area'] == '礁溪鄉' ? 'selected' : ''  ?>>礁溪鄉</option>
+                            <option value="員山鄉" <?= $row['area'] == '員山鄉' ? 'selected' : ''  ?>>員山鄉</option>
+                            <option value="宜蘭市" <?= $row['area'] == '宜蘭市' ? 'selected' : ''  ?>>宜蘭市</option>
+                            <option value="三星鄉" <?= $row['area'] == '三星鄉' ? 'selected' : ''  ?>>三星鄉</option>
+                            <option value="大同鄉" <?= $row['area'] == '大同鄉' ? 'selected' : ''  ?>>大同鄉</option>
+                            <option value="南澳鄉" <?= $row['area'] == '南澳鄉' ? 'selected' : ''  ?>>南澳鄉</option>
+                            <option value="羅東鎮" <?= $row['area'] == '羅東鎮' ? 'selected' : ''  ?>>羅東鎮</option>
+                            <option value="冬山鄉" <?= $row['area'] == '冬山鄉' ? 'selected' : ''  ?>>冬山鄉</option>
+                            <option value="蘇澳鎮" <?= $row['area'] == '蘇澳鎮' ? 'selected' : ''  ?>>蘇澳鎮</option>
+                            <option value="五結鄉" <?= $row['area'] == '五結鄉' ? 'selected' : ''  ?>>五結鄉</option>
+                            <option value="壯圍鄉" <?= $row['area'] == '壯圍鄉' ? 'selected' : ''  ?>>壯圍鄉</option>
+                            <!-- TODO:是否能用廻圈判斷？ -->
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="type" class="form-label">類型</label>
+                        <textarea class="form-control" name="type" id="type" cols="30" rows="1"><?= $row['type'] ?></textarea>
+                        <div class="form-text red"></div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="open_time" class="form-label">開放時間</label>
+                        <textarea class="form-control" name="open_time" id="open_time" cols="30" rows="1"><?= $row['open_time'] ?></textarea>
+                        <div class="form-text red"></div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="close_day" class="form-label">休館日</label>
+                        <textarea class="form-control" name="close_day" id="close_day" cols="30" rows="1"><?= $row['close_day'] ?></textarea>
+                        <div class="form-text red"></div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="tel" class="form-label">電話</label>
+                        <input type="text" class="form-control" id="tel" name="tel" value="<?= $row['tel'] ?>">
+                        <div class="form-text red"></div>
+                        <!-- TODO:設定or判斷式 -->
+                    </div>
+                    <div class="mb-3">
+                        <label for="address" class="form-label">地址</label>
+                        <textarea class="form-control" name="address" id="address" cols="30" rows="2"><?= $row['address'] ?></textarea>
+                        <div class="form-text red"></div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="description" class="form-label">描述</label>
+                        <textarea class="form-control" name="description" id="description" cols="30" rows="3"><?= $row['description'] ?></textarea>
+                        <div class="form-text red"></div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="event_site" class="form-label">活動網址</label>
+                        <textarea class="form-control" name="event_site" id="event_site" cols="30" rows="2"><?= $row['event_site'] ?></textarea>
+                        <div class="form-text red"></div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">修改</button>
+                    </form>
+                    <br>
+                    <div id="info-bar" class="alert alert-success" role="alert" style="display:none;">
+                        資料編輯成功
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 </div>
 
 <?php include __DIR__ . '/parts/scripts.php' ?>

@@ -101,7 +101,7 @@ if ($totalRows > 0) {
                         // 注意註解時要使用特殊方式，不然會讀到註解裡面的php
                         ?>
                         <td class="p-3"><?= $r['sid'] ?></td>
-                        <td class="p-3"><img src="./imgs/<?= $r['pic'] ?>.jpg" alt="" class="card-img" style="width:100px"></td>
+                        <td class="p-3"><img src="./uploaded/<?= $r['pic'] ?>" alt="" class="card-img" style="width:100px"></td>
                         <td class="p-3"><?= htmlentities($r['area']) ?></td>
                         <td class="p-3"><?= htmlentities($r['name']) ?></td>
                         <td style="display: none" class="p-3"><?= htmlentities($r['type']) ?></td>

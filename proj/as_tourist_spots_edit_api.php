@@ -17,6 +17,33 @@ $sid = isset($_POST['sid']) ? intval($_POST['sid']) : 0;
 // exit;
 // 測試有沒有正確執行，取得SID
 
+$folder = __DIR__ . '/uploaded/';
+
+// 用來篩選檔案, 用來決定副檔名
+$extMap = [
+    'image/jpeg' => '.jpg',
+    'image/png' => '.png',
+    'image/gif' => '.gif',
+];
+
+if (empty($extMap[$_FILES['picture']['type']])) {
+    $output['error'] = '檔案類型錯誤';
+    echo json_encode($output, JSON_UNESCAPED_UNICODE);
+    exit;
+}
+$ext = $extMap[$_FILES['picture']['type']]; // 副檔名
+
+$filename = md5($_FILES['picture']['name'] . rand()) . $ext;
+
+$output['filename'] = $filename;
+
+// 把上傳的檔案搬移到指定的位置
+if (move_uploaded_file($_FILES['picture']['tmp_name'], $folder . $filename)) {
+    $output['success'] = true;
+} else {
+    $output['error'] = '無法搬動檔案';
+}
+
 
 // TODO: 欄位檢查, 後端的檢查
 if (empty($_POST['name'])) {
@@ -26,7 +53,7 @@ if (empty($_POST['name'])) {
     exit;
 }
 $name = $_POST['name'] ?? '';
-$pic = $_POST['pic'] ?? '';
+$pic = $filename;
 $area = $_POST['area'] ?? '';
 $type = $_POST['type'] ?? '';
 $open_time = $_POST['open_time'] ?? '';
@@ -61,6 +88,7 @@ $stmt->execute([
     $descripition,
     $event_site,
 ]);
+
 
 
 if ($stmt->rowCount() == 1) {

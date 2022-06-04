@@ -73,12 +73,8 @@ if (empty($row)) {
                             <div class="mb-3">
                                 <label for="pic" class="form-label">配圖</label>
                                 <div action="as_upload_picture_api.php" method="post" enctype="multipart/form-data" style="width: 250px;">
-                                    <input type="file" id="pic" name="picture" class="form-control" accept="image/*" />
-
+                                    <input type="file" id="pic" name="picture" class="form-control" accept="image/*" <?= $row['pic'] == true ? 'selected' : ''  ?> />
                                 </div>
-
-                                <!-- <button id="pic" name="pic" onclick="uploadPicture()">上傳圖片</button> -->
-                                <!-- 建立一個invisble的欄位 并放入得到的檔名，然後在黨們這邊放 $row['pic'] -->
                                 <br>
                                 <img id="myimg" src="" alt="" style="width: 250px;" class="pt-2" />
                             </div>
@@ -177,16 +173,26 @@ if (empty($row)) {
     const picture = document.form1.picture;
 
     picture.addEventListener('change', async function() {
-        const formdata = new FormData(document.form1);
-        const row = await fetch('as_upload_picture_api.php', {
-            method: 'POST',
-            body: formdata,
-        });
-        const obj = await row.json();
-        console.log(obj);
-        //obj['filename'];
-        // 這裡是抓到亂碼的圖片檔名，現在要想這麼把他傳回資料庫到pic的欄位上
-        myimg.src = "./uploaded/" + obj.filename;
+        // const formdata = new FormData(document.form1);
+        // const row = await fetch('as_upload_picture_api.php', {
+        //     method: 'POST',
+        //     body: formdata,
+        // });
+        // const obj = await row.json();
+        // console.log(obj);
+        // //obj['filename'];
+        // // 這裡是抓到亂碼的圖片檔名，現在要想這麼把他傳回資料庫到pic的欄位上
+        // myimg.src = "./uploaded/" + obj.filename;
+        const file = this.files[0];
+        console.log(file);
+        const reader = new FileReader();
+
+        reader.onload = function() {
+            console.log(reader.result);
+            myimg.src = reader.result;
+            myimg.style = "display:inline; width: 250px;"
+        }
+        reader.readAsDataURL(file);
     });
 
     function uploadPicture() {
@@ -260,6 +266,10 @@ if (empty($row)) {
             fields[8].classList.add('red');
             fieldTexts[8].innerText = '至少輸入十個字';
             isPass = false;
+        }
+        if (pic_f == null) {
+            pic_f == $row['pic']
+            console.log("pic_f == null")
         }
         // if (email_f.value && !email_re.test(email_f.value)) {
         //     // alert('email 格式錯誤');

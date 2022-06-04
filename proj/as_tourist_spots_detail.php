@@ -41,7 +41,7 @@ $open = '開放時間：';
                 景點詳情
             </div>
             <div class="card-body d-flex justify-content-center flex-column" name="card1">
-                <img src="./imgs/<?= $row['pic'] ?>.jpg" class="img-fluid rounded mx-auto d-block" style="width: 600px;" alt="...">
+                <img src="./uploaded/<?= $row['pic'] ?>" class="img-fluid rounded mx-auto d-block" style="width: 600px;" alt="...">
                 <div style="width:600px ;">
                     <h2 class="card-title mt-3"><?= $row['name'] ?></h2>
                     <small class="text-muted">位於 <?= $row['area'] ?> 的 <?= $row['type'] ?></small>

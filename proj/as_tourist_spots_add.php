@@ -43,10 +43,16 @@ $title = '新增景點資料 - 舒營';
                                 <div class="form-text red"></div>
                             </div>
                             <div class="mb-3">
-                                <form action="as_upload_picture_api.php" method="post" enctype="multipart/form-data" style="display: none">
+                                <label for="pic" class="form-label">配圖</label>
+                                <div action="as_upload_picture_api.php" method="post" enctype="multipart/form-data" style="width: 250px;">
+                                    <input type="file" id="pic" name="picture" class="form-control" accept="image/*" />
+                                </div>
+                                <br>
+                                <img id="myimg" src="" alt="" style="width: 250px;" class="pt-2" />
+                                <!-- <form action="as_upload_picture_api.php" method="post" enctype="multipart/form-data" style="display: none">
                                     <input type="file" name="picture" accept="image/*" />
 
-                                </form>
+                                </form> -->
                                 <!-- <label for="pic" class="form-label">配圖</label>
                                 <button id="pic" name="pic" onclick="uploadPicture()">上傳圖片</button>
                                 <br>
@@ -129,14 +135,16 @@ $title = '新增景點資料 - 舒營';
     const picture = document.form1.picture;
 
     picture.addEventListener('change', async function() {
-        const fd = new FormData(document.form1);
-        const r = await fetch('as_upload_picture_api.php', {
-            method: 'POST',
-            body: fd,
-        });
-        const obj = await r.json();
-        console.log(obj);
-        myimg.src = "./uploaded/" + obj.filename;
+        const file = this.files[0];
+        console.log(file);
+        const reader = new FileReader();
+
+        reader.onload = function() {
+            console.log(reader.result);
+            myimg.src = reader.result;
+            myimg.style = "display:inline; width: 250px;"
+        }
+        reader.readAsDataURL(file);
     });
 
     function uploadPicture() {
@@ -163,7 +171,7 @@ $title = '新增景點資料 - 舒營';
     // }
 
     for (let i = 0; i < fields.length; i++) {
-        // console.log(i, fields[i])
+        console.log(i, fields[i])
         fieldTexts.push(fields[i].nextElementSibling);
     }
 
