@@ -3,6 +3,7 @@ $pageName = 'as_tourist_spots_edit';
 $title = '編輯景點資料 - 舒營';
 
 
+// 概念：接受SID 沒有值就不做，拿到資料到row的變數裡面，再放到JS裡面，並且用JSON輸出
 
 $sid = isset($_GET['sid']) ? intval($_GET['sid']) : 0;
 if (empty($sid)) {
@@ -10,10 +11,14 @@ if (empty($sid)) {
     header('Location: as_tourist_spots_list.php');
     exit;
 }
-
+// 如果$sid是空字串或者是0，那就不做了（false）
+// 有的話就會進去上面if的循環，直接讓query執行
+// 沒有就直接exit轉回列表頁
 
 $row = $pdo->query("SELECT * FROM `tourist_spot` WHERE sid=$sid")->fetch();
 if (empty($row)) {
+    // 拿到sid（帶入上面的變數）後執行fetch，要嘛拿到一筆，要嘛什麼都沒拿到
+    // 如果是空的陣列，empty會拿到true,也是跟上面一樣直接跳轉到列表頁
     header('Location: as_tourist_spots_list.php');
     exit;
 }
@@ -32,6 +37,8 @@ if (empty($row)) {
     }
 </style>
 
+<!-- htmlentitles 把標籤全部用掉 -->
+<!-- 還有另外一種tag的方法-->
 <div class="container p-5 pt-0">
     <div class="w-100 d-flex justify-content-end">
         <a class="nav-link text-dark p-3" href="as_tourist_spots_list.php">
@@ -56,7 +63,8 @@ if (empty($row)) {
                         <h5 class="card-title">編輯資料</h5>
                         <form name="form1" onsubmit="sendData();return false;" novalidate>
                             <input type="hidden" name="sid" value="<?= $row['sid'] ?>">
-
+                            <!-- 為了讓後端知道是哪一筆，最好是其他資料一起送，最方便的做法就是直接在這邊放input隱藏欄位 ,雖然看不到，但是當送出的時候會一起送出-->
+                            <!-- name sid 就是primarykey的 欄位-->
                             <div class="mb-3">
                                 <label for="name" class="form-label">名稱</label>
                                 <textarea class="form-control" name="name" id="name" cols="30" rows="1"><?= $row['name'] ?></textarea>
@@ -65,13 +73,26 @@ if (empty($row)) {
                             <div class="mb-3">
                                 <label for="pic" class="form-label">配圖</label>
                                 <div action="as_upload_picture_api.php" method="post" enctype="multipart/form-data" style="width: 250px;">
-                                    <input type="file" id="pic" name="picture" class="form-control" accept="image/*" value="<?= $row['pic'] ?>" />
+                                    <input type="text" id="pic" name="picture" class="form-control" accept="image/*" >
+                                    <!-- <button id="pic" name="pic" onclick="uploadPicture()">上傳圖片</button> -->
                                 </div>
                                 <br>
                                 <img id="myimg" src="./uploaded/<?= $row['pic'] ?>" alt="" style="width: 250px;" class="pt-2" />
-                                <input type="hidden" name="pic_origin" value="<?= $row['pic'] ?>">
                             </div>
+                            <!-- <div action="as_upload_picture_api.php" method="post" enctype="multipart/form-data" >
+                                    <input type="file" name="picture" accept="image/*" />
 
+                                </div> -->
+                            <!-- <form action="as_upload_picture_api.php" method="post" enctype="multipart/form-data">
+                                    <input type="file" name="picture" accept="image/*" />
+
+                                </form> -->
+                            <!-- <label for="pic" class="form-label">配圖</label>
+                                 -->
+                            <!-- 建立一個invisble的欄位 并放入得到的檔名，然後在黨們這邊放 $row['pic'] -->
+                            <!-- <br>
+                                <img id="myimg" src="" alt="" style="width: 250px;" class="pt-2" />
+                            </div> -->
                             <div class="mb-3">
                                 <label for="area" class="form-label">區域</label>
                                 <select class="form-control" name="area" id="area">
@@ -143,6 +164,8 @@ if (empty($row)) {
 <?php include __DIR__ . '/parts/scripts.php' ?>
 <script>
     const row = <?= json_encode($row, JSON_UNESCAPED_UNICODE); ?>;
+    // 這邊的JS就是當有資料時轉換成json_encode，並且設定不要跳脫
+    // 
 
     const tel_re = /\d{2,4}-?\d{3,4}-?\d{3,4}#?(\d+)?/;
 
@@ -151,6 +174,16 @@ if (empty($row)) {
     const picture = document.form1.picture;
 
     picture.addEventListener('change', async function() {
+        // const formdata = new FormData(document.form1);
+        // const row = await fetch('as_upload_picture_api.php', {
+        //     method: 'POST',
+        //     body: formdata,
+        // });
+        // const obj = await row.json();
+        // console.log(obj);
+        // //obj['filename'];
+        // // 這裡是抓到亂碼的圖片檔名，現在要想這麼把他傳回資料庫到pic的欄位上
+        // myimg.src = "./uploaded/" + obj.filename;
         const file = this.files[0];
         console.log(file);
         const reader = new FileReader();
@@ -182,7 +215,9 @@ if (empty($row)) {
 
     const fields = [name_f, pic_f, area_f, type_f, open_time_f, close_day_f, tel_f, address_f, description_f, event_site_f];
     const fieldTexts = [];
-
+    // for (let f of fields) {
+    //     fieldTexts.push(f.nextElementSibling);
+    // }
 
     for (let i = 0; i < fields.length; i++) {
         // console.log(i, fields[i]);
@@ -192,6 +227,10 @@ if (empty($row)) {
 
     async function sendData() {
 
+        // for (let i in fields) {
+        //     // fields[i].classList.remove('red');
+        //     fieldTexts[i].innerText = '';
+        // }
         info_bar.style.display = 'none'; // 隱藏訊息列
 
 
@@ -199,20 +238,27 @@ if (empty($row)) {
         let isPass = true; // 預設是通過檢查的
 
         if (name_f.value.length < 3) {
-
+            // alert('姓名至少兩個字');
+            // name_f.classList.add('red');
+            // name_f.nextElementSibling.classList.add('red');
+            // name_f.closest('.mb-3').querySelector('.form-text').classList.add('red');
             fields[0].classList.add('red');
             fieldTexts[0].innerText = '至少輸入三個字';
             isPass = false;
         }
 
         if (tel_f.value && !tel_re.test(tel_f.value)) {
+            // alert('手機號碼格式錯誤');
             fields[6].classList.add('red');
             fieldTexts[6].innerText = '號碼格式錯誤';
             isPass = false;
         }
 
         if (address_f.value.length < 3) {
-
+            // alert('姓名至少兩個字');
+            // name_f.classList.add('red');
+            // name_f.nextElementSibling.classList.add('red');
+            // name_f.closest('.mb-3').querySelector('.form-text').classList.add('red');
             fields[7].classList.add('red');
             fieldTexts[7].innerText = '至少輸入三個字';
             isPass = false;
@@ -225,9 +271,13 @@ if (empty($row)) {
         if (pic_f == null) {
             pic_f == $row['pic']
             console.log("pic_f == null")
-            console.log(pic_f);
         }
-
+        // if (email_f.value && !email_re.test(email_f.value)) {
+        //     // alert('email 格式錯誤');
+        //     fields[1].classList.add('red');
+        //     fieldTexts[1].innerText = 'email 格式錯誤';
+        //     isPass = false;
+        // }
         if (!isPass) {
             return; // 結束函式
         }
