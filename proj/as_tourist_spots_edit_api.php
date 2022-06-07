@@ -28,6 +28,7 @@ $extMap = [
 //     exit;
 // }
 if (!empty($_FILES['picture']['name'])){
+    // 判斷如果pic name 不是空值就會跑下面，為空則跳過
     if (empty($extMap[$_FILES['picture']['type']])) {
         $output['error'] = '檔案類型錯誤';
         echo json_encode($output, JSON_UNESCAPED_UNICODE);
@@ -57,6 +58,7 @@ if (empty($_POST['name'])) {
 }
 $name = $_POST['name'] ?? '';
 $pic = $filename ?? $_POST['pic_origin'];
+// filename存在則上傳filename,沒有的話就是上傳前面設置的隱藏欄位pic_origin
 $area = $_POST['area'] ?? '';
 $type = $_POST['type'] ?? '';
 $open_time = $_POST['open_time'] ?? '';
